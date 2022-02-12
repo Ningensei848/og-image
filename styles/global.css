@@ -1,0 +1,10 @@
+ul.signatories li {
+  margin-bottom: 0.5rem;
+}
+
+ul.signatories li a {
+  text-decoration: none;
+}
+ul.signatories li a:hover {
+  text-decoration: underline;
+}
