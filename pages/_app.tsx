@@ -16,6 +16,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
+        <meta name='viewport' content='initial-scale=1, width=device-width' />
         <title>Image Generator for OGP</title>
         <GoogleTagManager />
         <GoogleAdsense />

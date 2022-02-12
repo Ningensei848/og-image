@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
+    "export": "next export",
     "start": "next start",
     "type-check": "tsc",
     "lint": "next lint --cache --ignore-path .gitignore",
@@ -20,6 +21,7 @@
     "marked": "^4.0.12",
     "next": "^12.0.10",
     "puppeteer-core": "6.0.0",
+    "query-string": "^7.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "swr": "^1.2.1",

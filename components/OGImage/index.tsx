@@ -5,26 +5,37 @@ import Toast from 'components/OGImage/parts/Toast'
 import { ThemeField, FileTypeField, TextInputField } from 'components/OGImage/Field'
 
 import type { Dispatch, SetStateAction } from 'react'
-import type { FileType, Theme } from 'types/og-image'
+import { useQueryParam } from 'libs/og-image/parser'
 
 interface PullLeftProps {
   setState: Dispatch<SetStateAction<string>>
 }
 
 const PullLeft = ({ setState }: PullLeftProps): JSX.Element => {
-  const [fileType, setFileType] = useState<FileType>('png')
-  const [theme, setTheme] = useState<Theme>('light')
-  const [timestamp, setTimestamp] = useState(new Date().toUTCString().split(/\s/).slice(2, 4).join('.'))
-  const [title, setTitle] = useState('**Hello** World')
-  // const [tags, setTags] = useState<Array<string>>([])
-  // const [copyright, setCopyright] = useState('')
-  const [logo, setLogo] = useState(
-    'https://assets.vercel.com/image/upload/front/assets/design/vercel-triangle-black.svg'
-  )
-  // const [avater, setAvater] = useState('')
-  // const [author, setAuthor] = useState('')
-  const [aka, setAka] = useState('')
-  const [site, setSite] = useState('')
+  const {
+    fileType,
+    setFileType,
+    theme,
+    setTheme,
+    timestamp,
+    setTimestamp,
+    title,
+    setTitle,
+    // tags,
+    // setTags,
+    // copyright,
+    // setCopyright,
+    logo,
+    setLogo,
+    // avater,
+    // setAvater,
+    // author,
+    // setAuthor,
+    aka,
+    setAka,
+    site,
+    setSite
+  } = useQueryParam()
 
   useEffect(() => {
     const queryParams = new URLSearchParams({
@@ -47,7 +58,7 @@ const PullLeft = ({ setState }: PullLeftProps): JSX.Element => {
     url.search = queryParams.toString()
     setState(url.href)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fileType, logo, site, theme, timestamp, title, aka])
+  }, [aka, fileType, logo, site, theme, timestamp, title])
 
   return (
     <div className='pull-left'>

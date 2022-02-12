@@ -36,11 +36,11 @@ const Body = (props: ParsedRequest): JSX.Element => {
       <div id='ogp-container'>
         <div id='ogp-left'>
           <div id='logo'>
-            <img alt='Generated' src={new URL(logo).toString()} width='auto' height='80' />
+            {logo ? <img alt='Generated' src={new URL(logo).toString()} width='auto' height='80' /> : ''}
           </div>
           <div id='author' className='heading'>
             {/* TODO: avater, author とのレイアウト */}
-            {aka}
+            {aka || ''}
           </div>
         </div>
         <div id='ogp-main'>
@@ -50,7 +50,7 @@ const Body = (props: ParsedRequest): JSX.Element => {
           {/* <CopyRights /> */}
         </div>
         <div id='ogp-right'>
-          <div id='timestamp'>{timestamp}</div>
+          <div id='timestamp'>{timestamp || ''}</div>
           <div id='sitename' className='heading'>
             {site || ''}
           </div>
@@ -67,7 +67,7 @@ const Title = ({ text }: { text: string }): JSX.Element => (
     id='title'
     className='heading'
     dangerouslySetInnerHTML={{
-      __html: twemojiParse(budoux.parse(text).join('<wbr>'), twOptions)
+      __html: twemojiParse(budoux.parse(text, 500).join('<wbr>'), twOptions)
     }}
   />
 )
