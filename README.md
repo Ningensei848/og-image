@@ -48,32 +48,20 @@ Now try changing the text `Hello%20World` to the title of your choosing and watc
 
 ## Deploy your own
 
-You'll want to fork this repository and deploy your own image generator.
-
-1. Click the fork button at the top right of GitHub
-2. Clone the repo to your local machine with `git clone URL_OF_FORKED_REPO_HERE`
-3. Change directory with `cd og-image`
-4. Make changes by swapping out images, changing colors, etc (see [contributing](https://github.com/vercel/og-image/blob/main/CONTRIBUTING.md) for more info)
-5. Remove all configuration inside `vercel.json` besides `rewrites`
-6. Run locally with `vercel dev` and visit [localhost:3000](http://localhost:3000) (if nothing happens, run `npm install -g vercel`)
-7. Deploy to the cloud by running `vercel` and you'll get a unique URL
-8. Connect [Vercel for GitHub](https://vercel.com/github) to automatically deploy each time you `git push` 🚀
-
-## Authors
-
-- Steven ([@styfle](https://twitter.com/styfle)) - [Vercel](https://vercel.com)
-- Evil Rabbit ([@evilrabbit](https://twitter.com/evilrabbit_)) - [Vercel](https://vercel.com)
-
-# TypeScript Next.js example
-
-This is a really simple project that shows the usage of Next.js with TypeScript.
-
-## Deploy your own
-
 Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-typescript&project-name=with-typescript&repository-name=with-typescript)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/Ningensei848/og-image&project-name=og-image&repository-name=og-image)
 
 ## How to use it?
 
-hogehoge
+[[underconstruction]]
+
+## Author
+
+[![Twitter is what's happening in the world and what people are talking about right now.](https://img.shields.io/badge/@Ningensei848-%231DA1F2.svg?&style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/Ningensei848)
+
+[![](https://img.shields.io/badge/k.kubokawa@klis.tsukuba.ac.jp-%23757575.svg?&style=for-the-badge&logo=gmail&logoColor=EA4335)](mailto:k.kubokawa@klis.tsukuba.ac.jp)
+
+## License
+
+_This software is released under the [MIT License](/LICENSE)._
