@@ -1,6 +1,6 @@
-<a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fog-image&demo-title=OG%20Image%20Generator&demo-description=A%20service%20that%20generates%20dynamic%20Open%20Graph%20images&demo-url=https%3A%2F%2Fog-image.vercel.app%2F&demo-image=https%3A%2F%2Fog-image.vercel.app%2FOpen%2520Graph%2520Image%2520as%2520a%2520Service.png%3Ftheme%3Dlight%26md%3D1%26fontSize%3D95px%26images%3Dhttps%253A%252F%252Fassets.vercel.com%252Fimage%252Fupload%252Ffront%252Fassets%252Fdesign%252Fzeit-black-triangle.svg"><img src="https://vercel.com/button" alt="Deploy with Vercel" align="right" width="128"/></a>
+[![The service supports not only markdown, but also Emoticon and KaTeX](https://custom-og-image-generator.vercel.app/api/This%20%60App%60%20supports%20not%20only%20**Markdown**%2C%20_but%20also_%3Cbr%20%2F%3E**Emoji**%20%F0%9F%8E%89%F0%9F%8E%8A%F0%9F%8D%BE%F0%9F%A5%B3%20_and_%3Cbr%20%2F%3E%20%24%5CKaTeX%24.png?theme=light&timestamp=&title=This+%60App%60+supports+not+only+**Markdown**%2C+_but+also_%3Cbr+%2F%3E**Emoji**+%F0%9F%8E%89%F0%9F%8E%8A%F0%9F%8D%BE%F0%9F%A5%B3+_and_%3Cbr+%2F%3E+%24%5CKaTeX%24&logo=https%3A%2F%2Fgithub.githubassets.com%2Fimages%2Fmona-loading-default-static.svg&aka=%40octocat&site=Ningensei848%2Fog-image)](https://custom-og-image-generator.vercel.app/)
 
-# [Open Graph Image as a Service](https://og-image.vercel.app)
+# [Open Graph Image as a Service](https://custom-og-image-generator.vercel.app/)
 
 <a href="https://twitter.com/vercel">
     <img align="right" src="https://og-image.vercel.app/tweet.png" height="300" />
@@ -33,14 +33,14 @@ It looks like the following:
 
 The short answer is that it would take a long time to painstakingly design an image for every single blog post and every single documentation page. And we don't want the exact same image for every blog post because that wouldn't make the article stand out when it was shared to Twitter.
 
-That's where `og-image.vercel.app` comes in. We can simply pass the title of our blog post to our generator service and it will generate the image for us on the fly!
+That's where `custom-og-image-generator.vercel.app` comes in. We can simply pass the title of our blog post to our generator service and it will generate the image for us on the fly!
 
 It looks like the following:
 
 ```html
 <head>
   <title>Hello World</title>
-  <meta property="og:image" content="https://og-image.vercel.app/Hello%20World.png" />
+  <meta property="og:image" content="https://custom-og-image-generator.vercel.app/api/**Hello**%20World.png" />
 </head>
 ```
 
@@ -48,9 +48,15 @@ Now try changing the text `Hello%20World` to the title of your choosing and watc
 
 ## Deploy your own
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+_**Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme).**_
+
+Click the following button to open the configuration for deploying to vercel:
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/Ningensei848/og-image&project-name=og-image&repository-name=og-image)
+
+You will see a screen similar to the following:
+
+![the configuration page for deploying to vercel](.github/images/configure-project.png)
 
 ## How to use it?
 
@@ -64,4 +70,4 @@ Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_mediu
 
 ## License
 
-_This software is released under the [MIT License](/LICENSE)._
+_This software is released under the [MIT License](LICENSE)._
