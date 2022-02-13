@@ -24,12 +24,8 @@ export function middleware(req: NextRequest) {
     if (searchParams.has('title')) {
       const title = searchParams.get('title')
       const temp = pathname.replace(pattern_apiPath, '')
-      console.log(`temp is ${temp}`)
-      const hoge = pattern_extension.test(temp) ? pathname.replace(text, title) : `/${title}.png`
-      console.log(`pathname is ${pathname}`)
-      console.log(`hoge is ${hoge}`)
-      nextUrl.pathname = decodeURIComponent(pathPrefix + hoge)
-      console.log('nextUrl is', nextUrl.pathname)
+      const hoge = pattern_extension.test(temp) ? pathname.replace(text, title) : `${title}.png`
+      nextUrl.pathname = `/${pathPrefix}/${encodeURIComponent(hoge.replace(/^\//, ''))}`
       searchParams.delete('title')
       searchParams.set('fileType', extension || 'png')
       nextUrl.search = searchParams.toString()
@@ -55,7 +51,6 @@ export function middleware(req: NextRequest) {
       nextUrl.pathname = ''
       searchParams.set('fileType', extension || 'png')
       nextUrl.search = searchParams.toString()
-      console.log(nextUrl.href)
       return NextResponse.redirect(nextUrl, 308)
     }
 
