@@ -60,7 +60,67 @@ You will see a screen similar to the following:
 
 ## How to use it?
 
-[[underconstruction]]
+### Get a static image
+
+1. Go to [this page](https://custom-og-image-generator.vercel.app)
+2. Fill in the form with the required information
+3. Click on the image to copy it to the clipboard
+
+### Generate images dynamically
+
+**Use the following URL as a base, and pass in the necessary query parameters.**
+
+[https://custom-og-image-generator.vercel.app/api/`{{FILE_NAME}}`.png](https://custom-og-image-generator.vercel.app/api/`{{FILE_NAME}}`.png)
+
+> `{{FILE_NAME}}.png` is interpreted as _**title**_
+
+<br />
+
+### List of acceptable parameters
+
+- fileType: `'png' | 'jpeg'`
+- theme: `'light' | 'dark'`
+- timestamp: `string`
+- **title**: `string`
+  - required if `{{FILE_NAME}}.png` is not specified
+  - if both `{{FILE_NAME}}.png` and `{{TITLE}}` specified, overwrite `{{FILE_NAME}}` with `{{TITLE}}`
+- [WIP] tags: `string[]`
+- [WIP] copyright: `string`
+- logo: `string` (only URL string)
+- [WIP] avater: `string` (only URL string)
+- [WIP] author: `string`
+- aka: `string`
+- site: `string`
+
+<br />
+<details>
+<summary>Example</summary>
+
+- [https://custom-og-image-generator.vercel.app](https://custom-og-image-generator.vercel.app)
+  - main page with default params
+- [https://custom-og-image-generator.vercel.app/?aka=@octocat](https://custom-og-image-generator.vercel.app/?aka=@octocat)
+  - with custom params (replaced defaults)
+- [https://custom-og-image-generator.vercel.app/`{{FILE_NAME}}`.png](https://custom-og-image-generator.vercel.app/{{FILE_NAME}}.png)
+  - `{{FILE_NAME}}.png` is interpreted as `?title={{FILE_NAME}}`
+  - redirect to [https://custom-og-image-generator.vercel.app/?title=`{{FILE_NAME}}`](https://custom-og-image-generator.vercel.app/?title={{FILE_NAME}})
+
+#### `/api`
+
+- [https://custom-og-image-generator.vercel.app/api/](https://custom-og-image-generator.vercel.app/api/)
+  - redirect to main page with no param
+- [https://custom-og-image-generator.vercel.app/api/`{{FILE_NAME}}.png`](https://custom-og-image-generator.vercel.app/api/{{FILE_NAME}}.png)
+  - generated image
+  - `{{FILE_NAME}}.png` is _mandatory_
+- [https://custom-og-image-generator.vercel.app/api/?title=`{{TITLE}}`](https://custom-og-image-generator.vercel.app/api/?title={{TITLE}})
+  - redirect to [https://custom-og-image-generator.vercel.app/api/`{{TITLE}}`.png](https://custom-og-image-generator.vercel.app/api/{{TITLE}}.png)
+- [https://custom-og-image-generator.vercel.app/api/?aka=@octocat](https://custom-og-image-generator.vercel.app/api/?aka=@octocat)
+  - If `{{FILE_NAME}}.png` or `?title={{TITLE}}` is not specified, then redirect to main page (with params)
+- [https://custom-og-image-generator.vercel.app/api/`{{FILE_NAME}}`.png?title=`{{TITLE}}`](https://custom-og-image-generator.vercel.app/api/{{FILE_NAME}}.png?title={{TITLE}})
+  - overwrite `{{FILE_NAME}}` with `{{TITLE}}`
+  - redirect to [https://custom-og-image-generator.vercel.app/api/`{{TITLE}}`.png](https://custom-og-image-generator.vercel.app/api/{{TITLE}}.png)
+
+</details>
+<br />
 
 ## Author
 
