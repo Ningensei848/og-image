@@ -1,16 +1,40 @@
 // cf. vercel/og-image: Open Graph Image as a Service - generate cards for Twitter, Facebook, Slack, etc
 // cf. https://github.com/vercel/og-image/blob/main/api/index.ts
 
+import Cors from 'cors'
+
 import { getScreenshot } from 'libs/og-image/chromium'
 import { parseRequest } from 'libs/og-image/parser'
 import { getHtml } from 'libs/og-image/template'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+// Initializing the cors middleware
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+const cors = Cors({ methods: ['GET'] })
+
+// Helper method to wait for a middleware to execute before continuing
+// And to throw an error when an error happens in a middleware
+function runMiddleware(req: NextApiRequest, res: NextApiResponse, fn) {
+  return new Promise((resolve, reject) => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    fn(req, res, (result: unknown) => {
+      if (result instanceof Error) {
+        return reject(result)
+      }
+      return resolve(result)
+    })
+  })
+}
+
 const isDev = !process.env.AWS_REGION
 const isHtmlDebug = process.env.OG_HTML_DEBUG === '1'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  // Run the middleware: cf. https://nextjs.org/docs/api-routes/api-middlewares#connectexpress-middleware-support
+  await runMiddleware(req, res, cors)
+
   const { query } = req
+
   try {
     const parsedReq = parseRequest(query.id as string, req)
     const html = getHtml(parsedReq)
@@ -35,9 +59,3 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 }
 
 export default handler
-
-// (node:21665) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 SIGINT listeners added to [process]. Use emitter.setMaxListeners() to increase limit
-// (Use `node --trace-warnings ...` to show where the warning was created)
-// (node:21665) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 SIGTERM listeners added to [process]. Use emitter.setMaxListeners() to increase limit
-
-// http://localhost:3000/api/qwert.png?theme=light&timestamp=Feb.2022&title=hello-world&logo=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fvercel-triangle-black.svg&aka=&site=
