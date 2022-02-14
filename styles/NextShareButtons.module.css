@@ -1,0 +1,9 @@
+.SocialButtons {
+  display: inline-flex;
+  margin-top: 1rem;
+  padding: 0.25rem 0;
+}
+.SocialButtons button {
+  margin-right: 0.2rem;
+  height: 48px;
+}

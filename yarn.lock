@@ -856,6 +856,7 @@ __metadata:
     eslint-plugin-import: ^2.25.4
     marked: ^4.0.12
     next: ^12.0.10
+    next-share: ^0.13.0
     prettier: ^2.5.1
     puppeteer-core: 6.0.0
     query-string: ^7.1.1
@@ -2275,6 +2276,17 @@ __metadata:
   version: 1.4.0
   resolution: "natural-compare@npm:1.4.0"
   checksum: 23ad088b08f898fc9b53011d7bb78ec48e79de7627e01ab5518e806033861bef68d5b0cd0e2205c2f36690ac9571ff6bcb05eb777ced2eeda8d4ac5b44592c3d
+  languageName: node
+  linkType: hard
+
+"next-share@npm:^0.13.0":
+  version: 0.13.0
+  resolution: "next-share@npm:0.13.0"
+  peerDependencies:
+    react: ^17.0.2
+    react-dom: ^17.0.2
+    react-scripts: ^4.0.3
+  checksum: 372c2cab63725300864b9e6193b726e53cf5527006baf81dfe2a0e76fa637c38be9469c20e0332456816374f43139cf731a4168c399843caa361a8e67035b39a
   languageName: node
   linkType: hard
 
