@@ -1,6 +1,6 @@
-[![The service supports not only markdown, but also Emoticon and KaTeX](https://custom-og-image-generator.vercel.app/api/This%20%60App%60%20supports%20not%20only%20**Markdown**%2C%20_but%20also_%3Cbr%20%2F%3E**Emoji**%20%F0%9F%8E%89%F0%9F%8E%8A%F0%9F%8D%BE%F0%9F%A5%B3%20_and_%3Cbr%20%2F%3E%20%24%5CKaTeX%24.png?theme=light&timestamp=&title=This+%60App%60+supports+not+only+**Markdown**%2C+_but+also_%3Cbr+%2F%3E**Emoji**+%F0%9F%8E%89%F0%9F%8E%8A%F0%9F%8D%BE%F0%9F%A5%B3+_and_%3Cbr+%2F%3E+%24%5CKaTeX%24&logo=https%3A%2F%2Fgithub.githubassets.com%2Fimages%2Fmona-loading-default-static.svg&aka=%40octocat&site=Ningensei848%2Fog-image)](https://custom-og-image-generator.vercel.app/)
+[![The service supports not only markdown, but also Emoticon and KaTeX](https://custom-og-image-generator.vercel.app/api/This%20%60App%60%20supports%20not%20only%20**Markdown**%2C%20_but%20also_%3Cbr%20%2F%3E**Emoji**%20%F0%9F%8E%89%F0%9F%8E%8A%F0%9F%8D%BE%F0%9F%A5%B3%20_and_%3Cbr%20%2F%3E%20%24%5CKaTeX%24.png?theme=light&timestamp=&title=This+%60App%60+supports+not+only+**Markdown**%2C+_but+also_%3Cbr+%2F%3E**Emoji**+%F0%9F%8E%89%F0%9F%8E%8A%F0%9F%8D%BE%F0%9F%A5%B3+_and_%3Cbr+%2F%3E+%24%5CKaTeX%24&logo=https%3A%2F%2Fgithub.githubassets.com%2Fimages%2Fmona-loading-default-static.svg&aka=%40octocat&site=Ningensei848%2Fog-image)](https://ningensei848.github.io/og-image/)
 
-# [Open Graph Image as a Service](https://custom-og-image-generator.vercel.app/)
+# [Open Graph Image as a Service](https://ningensei848.github.io/og-image/)
 
 <a href="https://twitter.com/vercel">
     <img align="right" src="https://og-image.vercel.app/tweet.png" height="300" />
