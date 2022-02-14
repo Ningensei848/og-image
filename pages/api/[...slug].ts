@@ -64,11 +64,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
     // png, jpeg ではなければ，編集画面へリダイレクト
     if (!(/\.?(png|jpe?g)$/.test(id))) {
-      // TODO: basepath を考慮 cf. http://localhost:3000/test/api/blog/temp?title=23456789
-      // http://localhost:3000/api?theme=dark&aka=octocat
-      // http://localhost:3000/test/api?theme=dark&aka=octocat&title=34567sauhirj
-      // return `id is ${id}`
-      res.redirect(308, `/?${stringify({ ...query, title: id })}`)
+      res.redirect(308, `/${basePath}?${stringify({ ...query, title: id })}`)
       return
     }
 
