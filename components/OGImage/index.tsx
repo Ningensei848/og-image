@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
+import getConfig from 'next/config'
 
+import { useQueryParam } from 'libs/og-image/parser'
 import ImagePreview from 'components/OGImage/Preview'
 import Toast from 'components/OGImage/parts/Toast'
 import { ThemeField, FileTypeField, TextInputField } from 'components/OGImage/Field'
 
 import type { Dispatch, SetStateAction } from 'react'
-import { useQueryParam } from 'libs/og-image/parser'
-import getConfig from 'next/config'
 
 // Only holds serverRuntimeConfig and publicRuntimeConfig
 const { publicRuntimeConfig } = getConfig() as {
@@ -131,9 +131,12 @@ const PullRight = (props: {
   )
 }
 
-const OGImage = (): JSX.Element => {
+interface OGImageProps {
+  source: string
+  setSource: Dispatch<SetStateAction<string>>
+}
+const OGImage = ({ source, setSource }: OGImageProps): JSX.Element => {
   const [toast, setToast] = useState({ show: false, message: '' })
-  const [source, setSource] = useState('')
 
   return (
     <div className='split'>

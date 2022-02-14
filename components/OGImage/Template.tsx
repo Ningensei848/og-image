@@ -20,6 +20,7 @@ const HTML = ({ props, style }: { props: ParsedRequest; style: string }): JSX.El
       <meta charSet='utf-8' />
       <title>Generated Image</title>
       <meta name='viewport' content='width=device-width, initial-scale=1' />
+      <link rel='preconnect' href='https://fonts.gstatic.com' />
       <style dangerouslySetInnerHTML={{ __html: style }} />
       <LoadCDN />
     </head>

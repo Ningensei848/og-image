@@ -18,7 +18,6 @@ const { publicRuntimeConfig } = getConfig() as {
 const basePath = (publicRuntimeConfig.basePath || '').replace(/^\//, '').replace(/\/$/, '')
 const pathPrefix = basePath ? `${basePath}/api` : 'api'
 
-
 // Initializing the cors middleware
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
 const cors = Cors({
@@ -63,7 +62,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return
     }
     // png, jpeg ではなければ，編集画面へリダイレクト
-    if (!(/\.?(png|jpe?g)$/.test(id))) {
+    if (!/\.?(png|jpe?g)$/.test(id)) {
       res.redirect(308, `/${basePath}?${stringify({ ...query, title: id })}`)
       return
     }
