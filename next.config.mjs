@@ -25,6 +25,7 @@ const nextConfig = {
     // publicRuntimeConfig: cf. https://nextjs.org/docs/api-reference/next.config.js/runtime-configuration
     publicRuntimeConfig: {
         plemolJP,
+        basePath: process.env.BASE_PATH,
         assetPrefix
     },
     // cf. https://nextjs.org/docs/messages/next-image-unconfigured-host

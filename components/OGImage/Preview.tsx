@@ -3,7 +3,8 @@ import type { ImagePreviewProps } from 'types/og-image'
 
 const Title = 'Click to copy image URL to clipboard'
 
-const fetcher = (url: string) => fetch(url).then((r: Response) => r.ok && r.status === 200)
+const fetcher = (url: string) =>
+  fetch(url, { mode: 'cors', redirect: 'follow' }).then((r: Response) => r.ok && r.status === 200)
 
 const useImagePreview = (url: string) => {
   const { data, error } = useSWR<boolean, Error>(url, fetcher, {
@@ -16,13 +17,27 @@ const useImagePreview = (url: string) => {
   }
 }
 
-const Loading = (): JSX.Element => {
-  return <div>loading...</div>
-}
+const Loading = (): JSX.Element => (
+  <div
+    className='loader-wrap'
+    style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '100%',
+      height: '100%',
+      background: 'lightgray'
+    }}
+  >
+    <div className='loader' />
+  </div>
+)
 
-const Error = (): JSX.Element => {
-  return <div>failed to load</div>
-}
+const Error = (): JSX.Element => (
+  <div>
+    <p>failed to load</p>
+  </div>
+)
 
 const ImagePreview = ({ src, setToast, onClick }: ImagePreviewProps): JSX.Element => {
   const { isLoading, isError } = useImagePreview(src)

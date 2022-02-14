@@ -281,15 +281,15 @@ img {
 }
 
 .image-wrapper {
-  /* display: block; */
+  display: block;
   cursor: pointer;
   text-decoration: none;
-  background: #fff;
+  background: transparent;
   /* box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.12); */
   border-radius: 5px;
   /* margin-bottom: 50px; */
   transition: all 0.2s ease;
-  /* max-width: 100%; */
+  max-width: 100%;
 }
 
 @media (max-width: 1000px) {

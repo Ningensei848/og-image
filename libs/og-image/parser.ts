@@ -86,7 +86,7 @@ export const useQueryParam = () => {
   const [tags, setTags] = useState<Array<string>>((query.tags as string[]) || [])
   const [copyright, setCopyright] = useState<string>((query.copyright as string) || '')
   const [logo, setLogo] = useState<string>(
-    (query.logo as string) || 'https://assets.vercel.com/image/upload/front/assets/design/vercel-triangle-black.svg'
+    (query.logo as string) || `https://assets.vercel.com/image/upload/front/assets/design/vercel-triangle-${theme === 'light' ? 'black' : 'white'}.svg`
   )
   const [avater, setAvater] = useState<string>((query.avater as string) || '')
   const [author, setAuthor] = useState<string>((query.author as string) || '')

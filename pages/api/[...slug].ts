@@ -2,15 +2,30 @@
 // cf. https://github.com/vercel/og-image/blob/main/api/index.ts
 
 import Cors from 'cors'
+import { stringify } from 'query-string'
 
 import { getScreenshot } from 'libs/og-image/chromium'
 import { parseRequest } from 'libs/og-image/parser'
 import { getHtml } from 'libs/og-image/template'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import getConfig from 'next/config'
+
+// Only holds serverRuntimeConfig and publicRuntimeConfig
+const { publicRuntimeConfig } = getConfig() as {
+  publicRuntimeConfig: { basePath: string }
+}
+
+const basePath = (publicRuntimeConfig.basePath || '').replace(/^\//, '').replace(/\/$/, '')
+const pathPrefix = basePath ? `${basePath}/api` : 'api'
+
 
 // Initializing the cors middleware
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-const cors = Cors({ methods: ['GET'] })
+const cors = Cors({
+  // options: cf. https://github.com/expressjs/cors#configuration-options
+  methods: ['GET'],
+  origin: '*'
+})
 
 // Helper method to wait for a middleware to execute before continuing
 // And to throw an error when an error happens in a middleware
@@ -34,9 +49,29 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   await runMiddleware(req, res, cors)
 
   const { query } = req
+  const slug = query.slug as string[]
+  const id = slug.join('/')
 
   try {
-    const parsedReq = parseRequest(query.id as string, req)
+    const parsedReq = parseRequest(id, req)
+    // もし query.title があれば，parsedReq.title を消して /api/{{query.title}}.png へリダイレクト
+    if ('title' in query) {
+      const title = query.title as string
+      // Delete `title` and `id`
+      const queryStr = stringify({ ...query, title: undefined, id: undefined })
+      res.redirect(308, `/${pathPrefix}/${encodeURIComponent(title)}.png?${queryStr}`)
+      return
+    }
+    // png, jpeg ではなければ，編集画面へリダイレクト
+    if (!(/\.?(png|jpe?g)$/.test(id))) {
+      // TODO: basepath を考慮 cf. http://localhost:3000/test/api/blog/temp?title=23456789
+      // http://localhost:3000/api?theme=dark&aka=octocat
+      // http://localhost:3000/test/api?theme=dark&aka=octocat&title=34567sauhirj
+      // return `id is ${id}`
+      res.redirect(308, `/?${stringify({ ...query, title: id })}`)
+      return
+    }
+
     const html = getHtml(parsedReq)
     if (isHtmlDebug) {
       res.setHeader('Content-Type', 'text/html')

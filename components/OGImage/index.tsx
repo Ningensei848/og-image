@@ -6,6 +6,12 @@ import { ThemeField, FileTypeField, TextInputField } from 'components/OGImage/Fi
 
 import type { Dispatch, SetStateAction } from 'react'
 import { useQueryParam } from 'libs/og-image/parser'
+import getConfig from 'next/config'
+
+// Only holds serverRuntimeConfig and publicRuntimeConfig
+const { publicRuntimeConfig } = getConfig() as {
+  publicRuntimeConfig: { basePath: string }
+}
 
 interface PullLeftProps {
   setState: Dispatch<SetStateAction<string>>
@@ -51,11 +57,18 @@ const PullLeft = ({ setState }: PullLeftProps): JSX.Element => {
     })
     // for (const tag of tags) queryParams.append('tags', tag)
     const url = new URL(
-      process.env.NEXT_PUBLIC_API_HOST ? `https://${process.env.NEXT_PUBLIC_API_HOST}` : window.location.origin
+      process.env.NEXT_PUBLIC_API_HOST
+        ? `${window.location.protocol}//${process.env.NEXT_PUBLIC_API_HOST}`
+        : window.location.origin
     )
-    const pathPrefix = (process.env.NEXT_PUBLIC_API_PREFIX || 'api').replace(/^\//, '').replace(/\/$/, '')
+
+    const basePath = (publicRuntimeConfig.basePath || '').replace(/^\//, '').replace(/\/$/, '')
+    const pathPrefix = basePath ? `${basePath}/api` : 'api'
+
     url.pathname = `/${pathPrefix}/${encodeURIComponent(title)}.${fileType}`
+    queryParams.delete('title')
     url.search = queryParams.toString()
+    console.log(`url is set ${url.href}`)
     setState(url.href)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [aka, fileType, logo, site, theme, timestamp, title])
