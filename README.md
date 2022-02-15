@@ -48,13 +48,19 @@ Now try changing the text `Hello%20World` to the title of your choosing and watc
 
 ## Deploy your own
 
+<a href="https://vercel.com/new/git/external?repository-url=https://github.com/Ningensei848/og-image&project-name=og-image&repository-name=og-image">
+<img src="https://vercel.com/button" alt="Deploy with Vercel" align="right" width="128"/>
+</a>
+
 _**Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme).**_
 
-Click the following button to open the configuration for deploying to vercel:
+---
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/Ningensei848/og-image&project-name=og-image&repository-name=og-image)
+<br />
 
 You will see a screen similar to the following:
+
+<br />
 
 ![the configuration page for deploying to vercel](.github/images/configure-project.png)
 
@@ -64,7 +70,8 @@ You will see a screen similar to the following:
 
 1. Go to [this page](https://custom-og-image-generator.vercel.app)
 2. Fill in the form with the required information
-3. Click on the image to copy it to the clipboard
+3. Click on the image to copy its URL to the clipboard
+4. Open a new tab, enter the URL, right-click on generated image and select 'Save As ...'
 
 ### Generate images dynamically
 
@@ -72,29 +79,31 @@ You will see a screen similar to the following:
 
 [https://custom-og-image-generator.vercel.app/api/`{{FILE_NAME}}`.png](https://custom-og-image-generator.vercel.app/api/`{{FILE_NAME}}`.png)
 
-> `{{FILE_NAME}}.png` is interpreted as _**title**_
+> `{{FILE_NAME}}.png` is interpreted as _**title**_ ([See also](#note))
 
 <br />
 
 ### List of acceptable parameters
 
-|     param |        type         | description                        |
-| --------: | :-----------------: | ---------------------------------- |
-|  fileType |  `'png' \| 'jpeg'`  | (default is `png`)                 |
-|     theme | `'light' \| 'dark'` | (default is `light` )              |
-|   _title_ |      `string`       | See the `Note` below.              |
-| timestamp |      `string`       | :arrow_upper_right:                |
-|      tags |     `string[]`      | :arrow_down_small:                 |
-| copyright |      `string`       | :arrow_double_down:                |
-|      logo |      `string`       | :arrow_upper_left:                 |
-|    avater |      `string`       | :arrow_lower_left: only URL string |
-|    author |      `string`       | :arrow_lower_left: only URL string |
-|       aka |      `string`       | :arrow_lower_left:                 |
-|      site |      `string`       | :arrow_lower_right:                |
+|     param |        type         | description              |
+| --------: | :-----------------: | ------------------------ |
+|  fileType |  `'png' \| 'jpeg'`  | (default is `png`)       |
+|     theme | `'light' \| 'dark'` | (default is `light` )    |
+|   _title_ |      `string`       | Refer to [`Note`](#note) |
+| timestamp |      `string`       | :arrow_upper_right:      |
+|      tags |     `string[]`      | :arrow_down_small:       |
+| copyright |      `string`       | :arrow_double_down:      |
+|      logo |      `string`       | :arrow_upper_left:       |
+|    avater | `string` (URL only) | :arrow_lower_left:       |
+|    author | `string` (URL only) | :arrow_lower_left:       |
+|       aka |      `string`       | :arrow_lower_left:       |
+|      site |      `string`       | :arrow_lower_right:      |
 
 #### Note
 
-**_`title`_** required if `{{FILE_NAME}}.png` is not specified. If both `{{FILE_NAME}}.png` and `{{TITLE}}` specified, overwrite `{{FILE_NAME}}` with `{{TITLE}}`.
+- **_`title`_** is required if `{{FILE_NAME}}.png` is not specified
+- If **both** `{{FILE_NAME}}.png` and `?title={{TITLE}}` specified, overwrite `{{FILE_NAME}}` with `{{TITLE}}`
+  - `?title={{TITLE}}` is given priority over `{{FILE_NAME}}.png`
 
 <br />
 
@@ -107,24 +116,27 @@ You will see a screen similar to the following:
 
 - [https://example.vercel.app](https://custom-og-image-generator.vercel.app)
   - main page with default params
-- [https://example.vercel.app/?aka=@octocat](https://custom-og-image-generator.vercel.app/?aka=@octocat)
-  - with custom params (replaced defaults)
+- [https://example.vercel.app/`?aka=@octocat`](https://custom-og-image-generator.vercel.app/?aka=@octocat)
+  - with custom params (replace defaults)
 - [https://example.vercel.app/`{{FILE_NAME}}`.png](https://custom-og-image-generator.vercel.app/{{FILE_NAME}}.png)
+  - If you specify a static asset _**without parameters**_, an error will occur (404 Not Found)
+  - This is so that the other static assets that make up the site are not recognized as parameters
+- [https://example.vercel.app/`{{FILE_NAME}}`.png`?aka=@octocat`](https://custom-og-image-generator.vercel.app/{{FILE_NAME}}.png?aka=@octocat)
   - `{{FILE_NAME}}.png` is interpreted as `?title={{FILE_NAME}}`
-  - redirect to [https://example.vercel.app/?title=`{{FILE_NAME}}`](https://custom-og-image-generator.vercel.app/?title={{FILE_NAME}})
+  - redirect to [https://example.vercel.app/`?title={{FILE_NAME}}`&aka=@octocat](https://custom-og-image-generator.vercel.app/?title={{FILE_NAME}}&aka=@octocat)
 
 ##### `/api`
 
 - [https://example.vercel.app/api/](https://custom-og-image-generator.vercel.app/api/)
   - redirect to main page with no param
-- [https://example.vercel.app/api/`{{FILE_NAME}}.png`](https://custom-og-image-generator.vercel.app/api/{{FILE_NAME}}.png)
+- [https://example.vercel.app/api/`{{FILE_NAME}}`.png](https://custom-og-image-generator.vercel.app/api/{{FILE_NAME}}.png)
   - generated image
-  - `{{FILE_NAME}}.png` is _mandatory_
-- [https://example.vercel.app/api/?title=`{{TITLE}}`](https://custom-og-image-generator.vercel.app/api/?title={{TITLE}})
+  - `{{FILE_NAME}}`.png is _mandatory_
+- [https://example.vercel.app/api/`?title={{TITLE}}`](https://custom-og-image-generator.vercel.app/api/?title={{TITLE}})
   - redirect to [https://example.vercel.app/api/`{{TITLE}}`.png](https://custom-og-image-generator.vercel.app/api/{{TITLE}}.png)
-- [https://example.vercel.app/api/?aka=@octocat](https://custom-og-image-generator.vercel.app/api/?aka=@octocat)
-  - If `{{FILE_NAME}}.png` or `?title={{TITLE}}` is not specified, then redirect to main page (with params)
-- [https://example.vercel.app/api/`{{FILE_NAME}}`.png?title=`{{TITLE}}`](https://custom-og-image-generator.vercel.app/api/{{FILE_NAME}}.png?title={{TITLE}})
+- [https://example.vercel.app/api/`?aka=@octocat`](https://custom-og-image-generator.vercel.app/api/?aka=@octocat)
+  - If neither `{{FILE_NAME}}`.png nor `?title={{TITLE}}` is specified, then redirect to main page (with params)
+- [https://example.vercel.app/api/`{{FILE_NAME}}`.png`?title={{TITLE}}`](https://custom-og-image-generator.vercel.app/api/{{FILE_NAME}}.png?title={{TITLE}})
   - overwrite `{{FILE_NAME}}` with `{{TITLE}}`
   - redirect to [https://example.vercel.app/api/`{{TITLE}}`.png](https://custom-og-image-generator.vercel.app/api/{{TITLE}}.png)
 
