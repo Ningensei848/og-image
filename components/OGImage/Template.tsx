@@ -28,6 +28,10 @@ const HTML = ({ props, style }: { props: ParsedRequest; style: string }): JSX.El
   </html>
 )
 
+const Invisible = (): JSX.Element => (
+  <span style={{ opacity: 0 }}>This text is invisible (as placeholder to avoid breaking the layout)</span>
+)
+
 const Body = (props: ParsedRequest): JSX.Element => {
   // const { timestamp, title, tags, copyright, logo, avater, author, aka, site } = props
   const { timestamp, title, logo, aka, site } = props
@@ -37,11 +41,11 @@ const Body = (props: ParsedRequest): JSX.Element => {
       <div id='ogp-container'>
         <div id='ogp-left'>
           <div id='logo'>
-            {logo ? <img alt='Generated' src={new URL(logo).toString()} width='auto' height='80' /> : ''}
+            {logo ? <img alt='Generated' src={new URL(logo).toString()} width='auto' height='80' /> : <Invisible />}
           </div>
           <div id='author' className='heading'>
             {/* TODO: avater, author とのレイアウト */}
-            {aka || ''}
+            {aka || <Invisible />}
           </div>
         </div>
         <div id='ogp-main'>
@@ -51,9 +55,9 @@ const Body = (props: ParsedRequest): JSX.Element => {
           {/* <CopyRights /> */}
         </div>
         <div id='ogp-right'>
-          <div id='timestamp'>{timestamp || ''}</div>
+          <div id='timestamp'>{timestamp || <Invisible />}</div>
           <div id='sitename' className='heading'>
-            {site || ''}
+            {site || <Invisible />}
           </div>
         </div>
       </div>
