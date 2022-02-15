@@ -18,9 +18,11 @@ const getCss = (props: ParsedRequest): string => {
   const codeBackground = theme === 'dark' ? '#333437' : '#f5f6f7'
   const codeTextColor = theme === 'dark' ? '#19ffcc' : '#e60033'
   const radial = theme === 'dark' ? 'dimgray' : 'lightgray'
+  const subText = theme === 'dark' ? 'lightgray' : 'dimgray'
+  const marginScale = title.length > 32 ? 4.8 : 18 - 13.2 * (title.length / 32) // 9 - 4.8
 
   return `
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500&display=swap');
   @font-face {
     font-family: 'PlemolJP Console';
     font-style: normal;
@@ -83,29 +85,78 @@ const getCss = (props: ParsedRequest): string => {
     justify-content: center;
     margin-top: 3.6rem;
   }
-  #author {
-    padding: 0 0 1.2rem 2rem;
+  #profile {
+    padding: 0 0 1.25rem 2rem;
     margin-right: calc(-50vw - 50vh);  /* negative margin */
     font-size: 2.2rem;
     font-weight: bolder;
+    display: flex;
+    flex-direction: column;
+  }
+  #display {
+    display: inline-flex;
+    max-height: 4.2rem;
+    align-items: center;
+  }
+  #avater {
+    width: 3.2rem;
+    height: 3.2rem;
+    object-fit: cover;
+    border-radius: 9999px;
+    margin-right: .75rem;
+  }
+  #author-name {
+    font-size: 2rem;
+  }
+  #aka {
+    font-size: 1.8rem;
+    color: ${subText};
+    margin-left: .25rem;
   }
   #ogp-main {
     width: 630px;
-    /* background-color: lightgreen; */
+    /*
+    background-color: lightgreen;
+    opacity: 0.5;
+    */
     display: flex;
     flex-direction: column;
-    justify-content: center; /* flex-start; space-around; */
+    justify-content: space-between;
   }
   #title {
     font-size: 44px;
-    margin-left: 1rem;
+    /* margin: ${title.length < 24 ? '9rem' : '4rem'} 1rem 0 2rem; */
+    margin: ${marginScale}rem 1rem 0 2rem;
     word-break: keep-all;
     overflow-wrap: break-word;
     display: -webkit-box;
     overflow: hidden;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
-    text-align: ${title.length < 32 ? 'center' : 'start'}
+    text-align: ${title.length < 24 ? 'center' : 'start'};
+  }
+  #tags {
+    margin: 0.5rem  0 0 2rem;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-align: ${title.length < 24 ? 'center' : 'start'};
+  }
+  .tag {
+    color: ${subText};
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1.4rem;
+    font-weight: lighter;
+    margin-right: 0.5rem;
+  }
+  #copyright {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: lighter;
+    color: ${subText};
+    opacity: 0.5;
+    margin-bottom: .5rem;
+    text-align: center;
   }
   #ogp-right {
     flex: 1 1 0;
@@ -125,7 +176,7 @@ const getCss = (props: ParsedRequest): string => {
     color: ${radial};
   }
   #sitename {
-    padding: 0 2rem 1.2rem 0;
+    padding: 0 2rem 1.6rem 0;
     margin-left: calc(-50vw - 50vh);  /* negative margin */
     font-size: 2rem;
     font-weight: bolder;

@@ -7,9 +7,21 @@ const pattern_extension = /\.?(png|jpe?g)$/
 const getShortenUrl = async (url: string): Promise<string> => {
   try {
     const res = await fetch(`https://is.gd/create.php?format=json&url=${url}`)
-    const { shorturl } = (await res.json()) as { shorturl: string }
-    return shorturl
+    // const { shorturl } = (await res.json()) as { shorturl: string }
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const { shorturl, errorcode, errormessage } = (await res.json()) as {
+      shorturl: string
+      errorcode?: unknown
+      errormessage?: string
+    }
+    if (errorcode) {
+      console.warn(errormessage)
+      return url
+    } else {
+      return shorturl
+    }
   } catch (e) {
+    console.warn(e)
     return url
   }
 }
@@ -20,24 +32,27 @@ const getPageUrlFromSrc = async (source: string): Promise<string> => {
   const params = url.searchParams
   // pathname を /api で split する
   const [pathname, filename] = url.pathname.split('/api')
+  url.pathname = pathname || ''
   // 得られたファイル名は，拡張子を削除したものを title としてセットする
   params.set('title', filename.replace(pattern_extension, ''))
   // params から値が無いものを取り除く
-  for (const key of params.keys()) {
-    const value = params.get(key)
-    if (!value.length) {
-      params.delete(key)
-      continue
-    }
-    // 値が `logo`, `avater` のとき，
-    // "https://is.gd/create.php?format=json&url=https://example.com" に投げて res.shorturl を得る
-    if (key === 'logo' || key === 'avater') {
-      if (isValidUrl(value)) params.set(key, await getShortenUrl(value))
-    }
-  }
-  url.pathname = pathname
+  url.searchParams.forEach((value, key) => {
+    if (!value.length) params.delete(key)
+  })
+
+  // 値が `logo`, `avater` のとき，生のURLは長大になるかもしれないため，短縮する
+  // "https://is.gd/create.php?format=json&url=https://example.com" に投げて res.shorturl を得る
+  const logo = params.get('logo')
+  const avater = params.get('avater')
+  if (logo && isValidUrl(logo)) params.set('logo', await getShortenUrl(logo))
+  if (avater && isValidUrl(avater)) params.set('avater', await getShortenUrl(avater))
+
   url.search = params.toString()
-  return url.href
+  console.log(url.href)
+  const res = await getShortenUrl(url.href)
+  console.log(res)
+
+  return res
 }
 
 const NextShareButtons = dynamic(() => import('components/NextShareButtons'), {
@@ -53,11 +68,11 @@ const OGImage = (): JSX.Element => {
   const [pageUrl, setPageUrl] = useState('')
 
   useEffect(() => {
-    const fn = async () => {
-      const shareLinkUrl = await getPageUrlFromSrc(imgSrc)
-      setPageUrl(shareLinkUrl)
-    }
-    void fn()
+    const fn = async () => setPageUrl(await getPageUrlFromSrc(imgSrc))
+    // delay 後 debounce の対象の関数を実行
+    const timer = setTimeout(() => void fn(), 1500)
+    // 次の effect が実行される直前に timer キャンセル
+    return () => clearTimeout(timer)
   }, [imgSrc])
 
   return (

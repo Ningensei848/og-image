@@ -1,6 +1,7 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable @next/next/no-head-element */
 
+import { Fragment } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { marked } from 'marked'
 import { parse as twemojiParse } from 'twemoji'
@@ -32,9 +33,50 @@ const Invisible = (): JSX.Element => (
   <span style={{ opacity: 0 }}>This text is invisible (as placeholder to avoid breaking the layout)</span>
 )
 
+interface AuthorProps {
+  avater: string
+  author: string
+  aka: string
+}
+const Author = ({ avater, author, aka }: Partial<AuthorProps>): JSX.Element => (
+  <div id='profile' className='heading'>
+    {/* TODO: avater, author とのレイアウト */}
+    {(!avater && !author) || (
+      <div id='display'>
+        {avater && <img id='avater' src={avater} alt='icon' />}
+        {author && <span id='author-name'>{author}</span>}
+      </div>
+    )}
+    {aka && <span id='aka'>{aka}</span>}
+  </div>
+)
+
+const Tag = ({ items }: { items: string[] }): JSX.Element => {
+  if (!items.length) {
+    return <></>
+  } else {
+    return (
+      <div id='tags'>
+        {items.map((item, idx) => (
+          <Fragment key={idx}>
+            <span className='tag'>#{item}</span>
+            <wbr />
+          </Fragment>
+        ))}
+      </div>
+    )
+  }
+}
+
+const CopyRight = ({ text }: { text: string }) => (
+  <div id='copyright'>
+    © {text} {new Date().getFullYear()}.
+  </div>
+)
+
 const Body = (props: ParsedRequest): JSX.Element => {
-  // const { timestamp, title, tags, copyright, logo, avater, author, aka, site } = props
-  const { timestamp, title, logo, aka, site } = props
+  const { timestamp, title, tags, copyright, logo, avater, author, aka, site } = props
+  // const { timestamp, title, logo, site } = props
 
   return (
     <body>
@@ -43,16 +85,21 @@ const Body = (props: ParsedRequest): JSX.Element => {
           <div id='logo'>
             {logo ? <img alt='Generated' src={new URL(logo).toString()} width='auto' height='80' /> : <Invisible />}
           </div>
-          <div id='author' className='heading'>
-            {/* TODO: avater, author とのレイアウト */}
-            {aka || <Invisible />}
-          </div>
+          <Author {...{ avater, author, aka }} />
+          {/* <Author
+            {...{
+              avater: 'https://pbs.twimg.com/profile_images/763543133724352513/r6RlBYDo_400x400.jpg',
+              aka: '@Ningensei848',
+              author: 'ありがとう上木敬🌤️'
+            }}
+          /> */}
         </div>
         <div id='ogp-main'>
-          <Title text={marked.parseInline(title)} />
-          <div className='spacer' />
-          {/* <Tag items={tags} /> */}
-          {/* <CopyRights /> */}
+          <div id='main-content'>
+            <Title text={marked.parseInline(title)} />
+            <Tag items={tags} />
+          </div>
+          <CopyRight text={copyright} />
         </div>
         <div id='ogp-right'>
           <div id='timestamp'>{timestamp || <Invisible />}</div>

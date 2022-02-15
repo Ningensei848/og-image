@@ -83,7 +83,7 @@ export const useQueryParam = () => {
     (query.timestamp as string) || new Date().toUTCString().split(/\s/).slice(2, 4).join('.')
   )
   const [title, setTitle] = useState<string>((query.title as string) || '**Hello** World')
-  const [tags, setTags] = useState<Array<string>>((query.tags as string[]) || [])
+  const [tags, setTags] = useState<string>((query.tags as string) || '')
   const [copyright, setCopyright] = useState<string>((query.copyright as string) || '')
   const [logo, setLogo] = useState<string>(
     (query.logo as string) ||

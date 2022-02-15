@@ -27,16 +27,16 @@ const PullLeft = ({ setState }: PullLeftProps): JSX.Element => {
     setTimestamp,
     title,
     setTitle,
-    // tags,
-    // setTags,
-    // copyright,
-    // setCopyright,
+    tags,
+    setTags,
+    copyright,
+    setCopyright,
     logo,
     setLogo,
-    // avater,
-    // setAvater,
-    // author,
-    // setAuthor,
+    avater,
+    setAvater,
+    author,
+    setAuthor,
     aka,
     setAka,
     site,
@@ -48,10 +48,11 @@ const PullLeft = ({ setState }: PullLeftProps): JSX.Element => {
       theme,
       timestamp,
       title,
-      // copyright,
+      tags,
+      copyright,
       logo,
-      // avater,
-      // author,
+      avater,
+      author,
       aka,
       site
     })
@@ -66,14 +67,24 @@ const PullLeft = ({ setState }: PullLeftProps): JSX.Element => {
     // NEXT_PUBLIC_API_HOST が指定されていれば pathPrefix は `api` （外部に API サーバがある場合）
     // そうでなければ，basePath をみて pathPrefix を決める（内部に自前で API サーバを持つ場合）
     const pathPrefix = process.env.NEXT_PUBLIC_API_HOST ? 'api' : basePath ? `${basePath}/api` : 'api'
-
     url.pathname = `/${pathPrefix}/${encodeURIComponent(title)}.${fileType}`
     queryParams.delete('title')
+
+    if (tags.length) {
+      queryParams.delete('tags')
+      tags.split(/[,，\s]+/).map((tag) => queryParams.append('tags', tag))
+    }
+
     url.search = queryParams.toString()
+
+    // 値が空白なパラメタを削除
+    queryParams.forEach((value, key) => {
+      if (!value.length) url.searchParams.delete(key)
+    })
     console.log(`url is set ${url.href}`)
     setState(url.href)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [aka, fileType, logo, site, theme, timestamp, title])
+  }, [aka, author, avater, copyright, fileType, logo, site, tags, theme, timestamp, title])
 
   return (
     <div className='pull-left'>
@@ -82,11 +93,11 @@ const PullLeft = ({ setState }: PullLeftProps): JSX.Element => {
         <FileTypeField {...{ fileType, setFileType }} />
         <TextInputField state={timestamp} setState={setTimestamp} label='Timestamp' />
         <TextInputField state={title} setState={setTitle} label='Title' />
-        {/* <TextInputField state={tags} setState={setTags} label='Tags' /> */}
-        {/* <TextInputField state={copyright} setState={setCopyright} label='Copyright' /> */}
+        <TextInputField state={tags} setState={setTags} label='Tags' />
+        <TextInputField state={copyright} setState={setCopyright} label='Copyright' />
         <TextInputField state={logo} setState={setLogo} label='Logo' type='url' />
-        {/* <TextInputField state={avater} setState={setAvater} label='Avater URL' type='url' /> */}
-        {/* <TextInputField state={author} setState={setAuthor} label='Author name' /> */}
+        <TextInputField state={avater} setState={setAvater} label='Avater URL' type='url' />
+        <TextInputField state={author} setState={setAuthor} label='Author name' />
         <TextInputField state={aka} setState={setAka} label='Alt name' />
         <TextInputField state={site} setState={setSite} label='Site name' />
       </div>
