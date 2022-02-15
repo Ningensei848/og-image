@@ -63,7 +63,9 @@ const PullLeft = ({ setState }: PullLeftProps): JSX.Element => {
     )
 
     const basePath = (publicRuntimeConfig.basePath || '').replace(/^\//, '').replace(/\/$/, '')
-    const pathPrefix = basePath ? `${basePath}/api` : 'api'
+    // NEXT_PUBLIC_API_HOST が指定されていれば pathPrefix は `api` （外部に API サーバがある場合）
+    // そうでなければ，basePath をみて pathPrefix を決める（内部に自前で API サーバを持つ場合）
+    const pathPrefix = process.env.NEXT_PUBLIC_API_HOST ? 'api' : basePath ? `${basePath}/api` : 'api'
 
     url.pathname = `/${pathPrefix}/${encodeURIComponent(title)}.${fileType}`
     queryParams.delete('title')

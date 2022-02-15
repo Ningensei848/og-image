@@ -15,7 +15,9 @@ const DefaultTitle =
 const getOGImageUrl = (base: string, asPath: string) => {
   const url = new URL(`https://${process.env.NEXT_PUBLIC_API_HOST}`)
   const basePath = base.replace(/^\//, '').replace(/\/$/, '')
-  const pathPrefix = basePath ? `${basePath}/api` : 'api'
+  // NEXT_PUBLIC_API_HOST が指定されていれば pathPrefix は `api` （外部に API サーバがある場合）
+  // そうでなければ，basePath をみて pathPrefix を決める（内部に自前で API サーバを持つ場合）
+  const pathPrefix = process.env.NEXT_PUBLIC_API_HOST ? 'api' : basePath ? `${basePath}/api` : 'api'
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_pathname, query] = asPath.split('?')
   const searchParams = new URLSearchParams(query)
