@@ -31,6 +31,7 @@ jobs:
         env:
           BASE_PATH: ${{ secrets.BASE_PATH }}
           NEXT_PUBLIC_API_HOST: ${{ secrets.API_HOST }}
+          NEXT_PUBLIC_CANONICAL:  ${{ secrets.CANONICAL }}
           NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID: ${{ secrets.GOOGLE_TAG_MANAGER_ID }}
           NEXT_PUBLIC_GOOGLE_ADSENSE_ID: ${{ secrets.GOOGLE_ADSENSE_ID }}
 

@@ -1,4 +1,4 @@
-[![The service supports not only markdown, but also Emoticon and KaTeX](https://custom-og-image-generator.vercel.app/api/This%20%60App%60%20supports%20not%20only%20**Markdown**%2C%20_but%20also_%3Cbr%20%2F%3E**Emoji**%20%F0%9F%8E%89%F0%9F%8E%8A%F0%9F%8D%BE%F0%9F%A5%B3%20_and_%3Cbr%20%2F%3E%20%24%5CKaTeX%24.png?theme=light&timestamp=&title=This+%60App%60+supports+not+only+**Markdown**%2C+_but+also_%3Cbr+%2F%3E**Emoji**+%F0%9F%8E%89%F0%9F%8E%8A%F0%9F%8D%BE%F0%9F%A5%B3+_and_%3Cbr+%2F%3E+%24%5CKaTeX%24&logo=https%3A%2F%2Fgithub.githubassets.com%2Fimages%2Fmona-loading-default-static.svg&aka=%40octocat&site=Ningensei848%2Fog-image)](https://ningensei848.github.io/og-image/)
+[![The service supports not only markdown, but also Emoticon and KaTeX](https://custom-og-image-generator.vercel.app/api/This%20%60App%60%20supports%20not%20only%20**Markdown**%2C%20_but%20also_%3Cbr%20%2F%3E**Emoji**%20%F0%9F%8E%89%F0%9F%8E%8A%F0%9F%8D%BE%F0%9F%A5%B3%20_and_%3Cbr%20%2F%3E%20%24%5CKaTeX%24.png?theme=light&copyright=Kubokawa+Takara&logo=https%3A%2F%2Fgithub.githubassets.com%2Fimages%2Fmona-loading-default-static.svg&avater=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F763543133724352513%2Fr6RlBYDo_400x400.jpg&author=Kiai&aka=%40Ningensei848&site=Ningensei848%2Fog-image&tags=nextjs&tags=image-generator&tags=vercel&tags=ogp-image)](https://ningensei848.github.io/og-image/)
 
 # [Open Graph Image as a Service](https://ningensei848.github.io/og-image/)
 
@@ -49,12 +49,10 @@ Now try changing the text `Hello%20World` to the title of your choosing and watc
 ## Deploy your own
 
 <a href="https://vercel.com/new/git/external?repository-url=https://github.com/Ningensei848/og-image&project-name=og-image&repository-name=og-image">
-<img src="https://vercel.com/button" alt="Deploy with Vercel" align="right" width="128"/>
+<img src="https://vercel.com/button" alt="Deploy with Vercel" align="right" width="192"/>
 </a>
 
 _**Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme).**_
-
----
 
 <br />
 
@@ -62,7 +60,7 @@ You will see a screen similar to the following:
 
 <br />
 
-![the configuration page for deploying to vercel](.github/images/configure-project.png)
+[![the configuration page for deploying to vercel](.github/images/configure-project.png)](https://vercel.com/new/git/external?repository-url=https://github.com/Ningensei848/og-image&project-name=og-image&repository-name=og-image)
 
 ## How to use it?
 
