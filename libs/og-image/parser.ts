@@ -76,6 +76,8 @@ export const useQueryParam = () => {
   const searchParams = new URLSearchParams(asPath.replace(/^.*?\?/, ''))
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   const query = parseQueryString(searchParams.toString() || '') as { [key: string]: string | string[] }
+  // convert from `string|Array<string>` to `string`
+  const tagString = Array.isArray(query.tags) ? query.tags.join(', ') : query.tags
 
   const [fileType, setFileType] = useState<FileType>((query.fileType as string as FileType) || 'png')
   const [theme, setTheme] = useState<Theme>((query.theme as string as Theme) || 'light')
@@ -83,7 +85,7 @@ export const useQueryParam = () => {
     (query.timestamp as string) || new Date().toUTCString().split(/\s/).slice(2, 4).join('.')
   )
   const [title, setTitle] = useState<string>((query.title as string) || '**Hello** World')
-  const [tags, setTags] = useState<string>((query.tags as string) || '')
+  const [tags, setTags] = useState<string>(tagString || '')
   const [copyright, setCopyright] = useState<string>((query.copyright as string) || '')
   const [logo, setLogo] = useState<string>(
     (query.logo as string) ||

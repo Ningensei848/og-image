@@ -74,3 +74,9 @@ export interface ImagePreviewProps {
     }>
   >
 }
+
+export interface AuthorProps {
+  avater: string
+  author: string
+  aka: string
+}

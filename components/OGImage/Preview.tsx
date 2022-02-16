@@ -1,7 +1,7 @@
 import useSWR from 'swr'
 import type { ImagePreviewProps } from 'types/og-image'
 
-const Title = 'Click to copy image URL to clipboard'
+const feedbackText = 'Click to copy image URL to clipboard'
 
 const fetcher = (url: string) =>
   fetch(url, { mode: 'cors', redirect: 'follow' }).then((r: Response) => r.ok && r.status === 200)
@@ -51,7 +51,7 @@ const ImagePreview = ({ src, setToast, onClick }: ImagePreviewProps): JSX.Elemen
 
   return (
     <a className='image-wrapper' href={src} onClick={onClick}>
-      <img id='og-image' src={src} alt='Preview of the generated img' title={Title} />
+      <img id='og-image' src={src} alt='Preview of the generated img' title={feedbackText} />
     </a>
   )
 }

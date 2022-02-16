@@ -9,7 +9,10 @@ import { loadDefaultJapaneseParser } from 'budoux'
 
 import LoadCDN from 'components/OGImage/LoadCDN'
 
-import type { ParsedRequest } from 'types/og-image'
+import type { AuthorProps, ParsedRequest } from 'types/og-image'
+
+const twOptions = { folder: 'svg', ext: '.svg' }
+const budoux = loadDefaultJapaneseParser()
 
 export const getStaticMarkup = (style: string, parsedReq: ParsedRequest) => {
   return renderToStaticMarkup(<HTML style={style} props={parsedReq} />)
@@ -29,15 +32,36 @@ const HTML = ({ props, style }: { props: ParsedRequest; style: string }): JSX.El
   </html>
 )
 
-const Invisible = (): JSX.Element => (
-  <span style={{ opacity: 0 }}>This text is invisible (as placeholder to avoid breaking the layout)</span>
-)
+const Body = (props: ParsedRequest): JSX.Element => {
+  const { timestamp, title, tags, copyright, logo, avater, author, aka, site } = props
 
-interface AuthorProps {
-  avater: string
-  author: string
-  aka: string
+  return (
+    <body>
+      <div id='ogp-container'>
+        <div id='ogp-left'>
+          <div id='logo'>
+            {logo ? <img alt='Generated' src={new URL(logo).toString()} width='auto' height='80' /> : <Invisible />}
+          </div>
+          <Author {...{ avater, author, aka }} />
+        </div>
+        <div id='ogp-main'>
+          <div id='main-content'>
+            <Title text={marked.parseInline(title)} />
+            <Tag items={tags} />
+          </div>
+          <CopyRight text={copyright} />
+        </div>
+        <div id='ogp-right'>
+          <div id='timestamp'>{timestamp || <Invisible />}</div>
+          <div id='sitename' className='heading'>
+            {site || <Invisible />}
+          </div>
+        </div>
+      </div>
+    </body>
+  )
 }
+
 const Author = ({ avater, author, aka }: Partial<AuthorProps>): JSX.Element => (
   <div id='profile' className='heading'>
     {/* TODO: avater, author とのレイアウト */}
@@ -49,6 +73,16 @@ const Author = ({ avater, author, aka }: Partial<AuthorProps>): JSX.Element => (
     )}
     {aka && <span id='aka'>{aka}</span>}
   </div>
+)
+
+const Title = ({ text }: { text: string }): JSX.Element => (
+  <div
+    id='title'
+    className='heading'
+    dangerouslySetInnerHTML={{
+      __html: twemojiParse(budoux.parse(text, 500).join('<wbr>'), twOptions)
+    }}
+  />
 )
 
 const Tag = ({ items }: { items: string[] }): JSX.Element => {
@@ -74,52 +108,6 @@ const CopyRight = ({ text }: { text: string }) => (
   </div>
 )
 
-const Body = (props: ParsedRequest): JSX.Element => {
-  const { timestamp, title, tags, copyright, logo, avater, author, aka, site } = props
-  // const { timestamp, title, logo, site } = props
-
-  return (
-    <body>
-      <div id='ogp-container'>
-        <div id='ogp-left'>
-          <div id='logo'>
-            {logo ? <img alt='Generated' src={new URL(logo).toString()} width='auto' height='80' /> : <Invisible />}
-          </div>
-          <Author {...{ avater, author, aka }} />
-          {/* <Author
-            {...{
-              avater: 'https://pbs.twimg.com/profile_images/763543133724352513/r6RlBYDo_400x400.jpg',
-              aka: '@Ningensei848',
-              author: 'ありがとう上木敬🌤️'
-            }}
-          /> */}
-        </div>
-        <div id='ogp-main'>
-          <div id='main-content'>
-            <Title text={marked.parseInline(title)} />
-            <Tag items={tags} />
-          </div>
-          <CopyRight text={copyright} />
-        </div>
-        <div id='ogp-right'>
-          <div id='timestamp'>{timestamp || <Invisible />}</div>
-          <div id='sitename' className='heading'>
-            {site || <Invisible />}
-          </div>
-        </div>
-      </div>
-    </body>
-  )
-}
-
-const twOptions = { folder: 'svg', ext: '.svg' }
-const budoux = loadDefaultJapaneseParser()
-const Title = ({ text }: { text: string }): JSX.Element => (
-  <div
-    id='title'
-    className='heading'
-    dangerouslySetInnerHTML={{
-      __html: twemojiParse(budoux.parse(text, 500).join('<wbr>'), twOptions)
-    }}
-  />
+const Invisible = (): JSX.Element => (
+  <span style={{ opacity: 0 }}>This text is invisible (as placeholder to avoid breaking the layout)</span>
 )

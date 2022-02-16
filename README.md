@@ -49,16 +49,14 @@ Now try changing the text `Hello%20World` to the title of your choosing and watc
 ## Deploy your own
 
 <a href="https://vercel.com/new/git/external?repository-url=https://github.com/Ningensei848/og-image&project-name=og-image&repository-name=og-image">
-<img src="https://vercel.com/button" alt="Deploy with Vercel" align="right" width="192"/>
+<img src="https://vercel.com/button" alt="Deploy with Vercel" align="right" width="110"/>
 </a>
+
+<br />
 
 _**Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme).**_
 
-<br />
-
 You will see a screen similar to the following:
-
-<br />
 
 [![the configuration page for deploying to vercel](.github/images/configure-project.png)](https://vercel.com/new/git/external?repository-url=https://github.com/Ningensei848/og-image&project-name=og-image&repository-name=og-image)
 
@@ -83,19 +81,19 @@ You will see a screen similar to the following:
 
 ### List of acceptable parameters
 
-|     param |        type         | description              |
-| --------: | :-----------------: | ------------------------ |
-|  fileType |  `'png' \| 'jpeg'`  | (default is `png`)       |
-|     theme | `'light' \| 'dark'` | (default is `light` )    |
+|     param |        type         |       description        |
+| --------: | :-----------------: | :----------------------: |
+|  fileType |  `'png' \| 'jpeg'`  |    (default is `png`)    |
+|     theme | `'light' \| 'dark'` |  (default is `light` )   |
 |   _title_ |      `string`       | Refer to [`Note`](#note) |
-| timestamp |      `string`       | :arrow_upper_right:      |
-|      tags |     `string[]`      | :arrow_down_small:       |
-| copyright |      `string`       | :arrow_double_down:      |
-|      logo |      `string`       | :arrow_upper_left:       |
-|    avater | `string` (URL only) | :arrow_lower_left:       |
-|    author | `string` (URL only) | :arrow_lower_left:       |
-|       aka |      `string`       | :arrow_lower_left:       |
-|      site |      `string`       | :arrow_lower_right:      |
+| timestamp |      `string`       |   :arrow_upper_right:    |
+|      tags |     `string[]`      |    :arrow_down_small:    |
+| copyright |      `string`       |   :arrow_double_down:    |
+|      logo |      `string`       |    :arrow_upper_left:    |
+|    avater | `string` (URL only) |    :arrow_lower_left:    |
+|    author | `string` (URL only) |    :arrow_lower_left:    |
+|       aka |      `string`       |    :arrow_lower_left:    |
+|      site |      `string`       |   :arrow_lower_right:    |
 
 #### Note
 

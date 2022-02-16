@@ -1,9 +1,7 @@
-const pattern_http = /^https?:\/\//
-
 export const isValidUrl = (url: string): boolean => {
   // validation: new URL(url) で typeError が発生するか否か
   try {
-    new URL(pattern_http.test(url) ? url : '')
+    new URL(/^https?:\/\//.test(url) ? url : '')
     return true
   } catch (e) {
     // const error =
