@@ -21,13 +21,12 @@ import {
 } from 'next-share'
 
 import styles from 'styles/NextShareButtons.module.css'
+import { HashTag } from 'consts/social'
 
 interface CommonProps {
   url: string
   title: string
 }
-
-const HashTag = process.env.NEXT_PUBLIC_HASHTAG || 'OGImage'
 
 const IconProps = {
   size: 32,

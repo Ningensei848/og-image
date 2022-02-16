@@ -1,17 +1,12 @@
 import { useEffect, useState } from 'react'
-import getConfig from 'next/config'
 
+import { BASE_PATH } from 'consts/global'
 import { useQueryParam } from 'libs/og-image/parser'
 import ImagePreview from 'components/OGImage/Preview'
 import Toast from 'components/OGImage/parts/Toast'
 import { ThemeField, FileTypeField, TextInputField } from 'components/OGImage/Field'
 
 import type { Dispatch, SetStateAction } from 'react'
-
-// Only holds serverRuntimeConfig and publicRuntimeConfig
-const { publicRuntimeConfig } = getConfig() as {
-  publicRuntimeConfig: { basePath: string }
-}
 
 interface PullLeftProps {
   setState: Dispatch<SetStateAction<string>>
@@ -63,15 +58,19 @@ const PullLeft = ({ setState }: PullLeftProps): JSX.Element => {
         : window.location.origin
     )
 
-    const basePath = (publicRuntimeConfig.basePath || '').replace(/^\//, '').replace(/\/$/, '')
     // NEXT_PUBLIC_API_HOST が指定されていれば pathPrefix は `api` （外部に API サーバがある場合）
-    // そうでなければ，basePath をみて pathPrefix を決める（内部に自前で API サーバを持つ場合）
-    const pathPrefix = process.env.NEXT_PUBLIC_API_HOST ? 'api' : basePath ? `${basePath}/api` : 'api'
+    // そうでなければ， BASE_PATH をみて pathPrefix を決める（内部に自前で API サーバを持つ場合）
+    const pathPrefix = process.env.NEXT_PUBLIC_API_HOST ? 'api' : BASE_PATH ? `${BASE_PATH}/api` : 'api'
     url.pathname = `/${pathPrefix}/${encodeURIComponent(title)}.${fileType}`
     queryParams.delete('title')
 
     if (tags.length) {
       queryParams.delete('tags')
+      // Unhandled Runtime Error
+      // TypeError: tags.split is not a function
+      // https://custom-og-image-generator.vercel.app/?logo=https%3A%2F%2Fgithub.githubassets.com%2Fimages%2Fmona-loading-default-static.svg&aka=%40Ningensei848&avater=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F763543133724352513%2Fr6RlBYDo_400x400.jpg&author=Kiai&title=This%20%60App%60%20supports%20not%20only%20**Markdown**%2C%20_but%20also_%3Cbr%20%2F%3E**Emoji**%20%F0%9F%8E%89%F0%9F%8E%8A%F0%9F%8D%BE%F0%9F%A5%B3%20_and_%3Cbr%20%2F%3E%20%24%5CKaTeX%24&tags=nextjs&tags=image-generator&tags=vercel&tags=ogp-image&site=Ningensei848%2Fog-image&theme=light&copyright=Kubokawa%20Takara
+      console.log(typeof tags)
+      console.log(tags)
       tags.split(/[,，\s]+/).map((tag) => queryParams.append('tags', tag))
     }
 

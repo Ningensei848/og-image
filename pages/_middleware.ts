@@ -1,6 +1,5 @@
+import { pattern_extension } from 'consts/global'
 import { type NextRequest, NextResponse } from 'next/server'
-
-const pattern_extension = /\.?(png|jpe?g)$/
 
 // _middleware.ts will run on all routes under `/pages`
 export function middleware(req: NextRequest) {

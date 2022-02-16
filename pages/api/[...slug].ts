@@ -4,19 +4,13 @@
 import Cors from 'cors'
 import { stringify } from 'query-string'
 
+import { BASE_PATH } from 'consts/global'
 import { getScreenshot } from 'libs/og-image/chromium'
 import { parseRequest } from 'libs/og-image/parser'
 import { getHtml } from 'libs/og-image/template'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import getConfig from 'next/config'
 
-// Only holds serverRuntimeConfig and publicRuntimeConfig
-const { publicRuntimeConfig } = getConfig() as {
-  publicRuntimeConfig: { basePath: string }
-}
-
-const basePath = (publicRuntimeConfig.basePath || '').replace(/^\//, '').replace(/\/$/, '')
-const pathPrefix = basePath ? `${basePath}/api` : 'api'
+const pathPrefix = BASE_PATH ? `${BASE_PATH}/api` : 'api'
 
 // Initializing the cors middleware
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
@@ -63,7 +57,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
     // png, jpeg ではなければ，編集画面へリダイレクト
     if (!/\.?(png|jpe?g)$/.test(id)) {
-      res.redirect(308, `/${basePath}?${stringify({ ...query, title: id })}`)
+      res.redirect(308, `/${BASE_PATH}?${stringify({ ...query, title: id })}`)
       return
     }
 

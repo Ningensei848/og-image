@@ -1,8 +1,8 @@
-import { isValidUrl } from 'libs/utils'
 import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 
-const pattern_extension = /\.?(png|jpe?g)$/
+import { pattern_extension } from 'consts/global'
+import { isValidUrl } from 'libs/utils'
 
 const getShortenUrl = async (url: string): Promise<string> => {
   try {
@@ -25,6 +25,7 @@ const getShortenUrl = async (url: string): Promise<string> => {
     return url
   }
 }
+
 const getPageUrlFromSrc = async (source: string): Promise<string> => {
   if (!isValidUrl(source)) return `https://${process.env.NEXT_PUBLIC_API_HOST}`
 

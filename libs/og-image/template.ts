@@ -1,18 +1,10 @@
-import getConfig from 'next/config'
+import { PlemolJP } from 'consts/global'
 import { getStaticMarkup } from 'components/OGImage/Template'
 
 import type { ParsedRequest } from 'types/og-image'
 
-const getFontData = () => {
-  const { publicRuntimeConfig } = getConfig() as {
-    publicRuntimeConfig: { plemolJP: string }
-  }
-  return publicRuntimeConfig.plemolJP
-}
-
 const getCss = (props: ParsedRequest): string => {
   const { theme, logo, title } = props
-  const plemolJP = getFontData()
   const background = theme === 'dark' ? '#1b1b1b' : '#fefefa'
   const foreground = theme === 'dark' ? '#fefefa' : '#353839'
   const codeBackground = theme === 'dark' ? '#333437' : '#f5f6f7'
@@ -27,7 +19,7 @@ const getCss = (props: ParsedRequest): string => {
     font-family: 'PlemolJP Console';
     font-style: normal;
     font-weight: normal;
-    src: url(data:font/woff2;charset=utf-8;base64,${plemolJP}) format("woff2");
+    src: url(data:font/woff2;charset=utf-8;base64,${PlemolJP}) format("woff2");
   }
   body {
     margin: 0;
