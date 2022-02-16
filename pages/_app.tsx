@@ -1,4 +1,5 @@
 import Head from 'next/head'
+// import getConfig from 'next/config'
 import { useRouter } from 'next/router'
 
 // cf. https://nextjs.org/docs/basic-features/built-in-css-support#import-styles-from-node_modules
@@ -6,7 +7,7 @@ import 'styles/global.css'
 import 'styles/og-image.css'
 
 import { TWITTER_SITE } from 'consts/social'
-import { BASE_PATH, DefaultTitle, Description, SITE_NAME, Title } from 'consts/global'
+import { DefaultTitle, Description, getRuntimeConfig, SITE_NAME, Title } from 'consts/global'
 import { usePageView } from 'libs/google'
 import { GoogleTagManager, GoogleAdsense } from 'components/Google'
 
@@ -29,6 +30,8 @@ const getOGImageUrl = (base: string, asPath: string) => {
 }
 
 const makeCanonical = (url: string) => {
+  const { basePath } = getRuntimeConfig<{ basePath: string }>()
+  const BASE_PATH = (basePath || '').replace(/^\//, '').replace(/\/$/, '')
   const { origin } = new URL(url.replace(/\/api/, ''))
   return BASE_PATH.length ? `${origin}/${BASE_PATH}` : origin
 }

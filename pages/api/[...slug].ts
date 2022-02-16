@@ -4,13 +4,11 @@
 import Cors from 'cors'
 import { stringify } from 'query-string'
 
-import { BASE_PATH } from 'consts/global'
+import { getRuntimeConfig } from 'consts/global'
 import { getScreenshot } from 'libs/og-image/chromium'
 import { parseRequest } from 'libs/og-image/parser'
 import { getHtml } from 'libs/og-image/template'
 import type { NextApiRequest, NextApiResponse } from 'next'
-
-const pathPrefix = BASE_PATH ? `${BASE_PATH}/api` : 'api'
 
 // Initializing the cors middleware
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
@@ -40,6 +38,9 @@ const isHtmlDebug = process.env.OG_HTML_DEBUG === '1'
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   // Run the middleware: cf. https://nextjs.org/docs/api-routes/api-middlewares#connectexpress-middleware-support
   await runMiddleware(req, res, cors)
+  const { basePath } = getRuntimeConfig<{ basePath: string }>()
+  const BASE_PATH = (basePath || '').replace(/^\//, '').replace(/\/$/, '')
+  const pathPrefix = BASE_PATH ? `${BASE_PATH}/api` : 'api'
 
   const { query } = req
   const slug = query.slug as string[]

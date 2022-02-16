@@ -1,10 +1,11 @@
-import { PlemolJP } from 'consts/global'
+import { getRuntimeConfig } from 'consts/global'
 import { getStaticMarkup } from 'components/OGImage/Template'
 
 import type { ParsedRequest } from 'types/og-image'
 
 const getCss = (props: ParsedRequest): string => {
   const { theme, logo, title } = props
+  const { plemolJP: PlemolJP } = getRuntimeConfig<{ plemolJP: string }>()
   const background = theme === 'dark' ? '#1b1b1b' : '#fefefa'
   const foreground = theme === 'dark' ? '#fefefa' : '#353839'
   const codeBackground = theme === 'dark' ? '#333437' : '#f5f6f7'

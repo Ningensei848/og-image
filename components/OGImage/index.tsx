@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { BASE_PATH } from 'consts/global'
+import { getRuntimeConfig } from 'consts/global'
 import { useQueryParam } from 'libs/og-image/parser'
 import ImagePreview from 'components/OGImage/Preview'
 import Toast from 'components/OGImage/parts/Toast'
@@ -60,6 +60,9 @@ const PullLeft = ({ setState }: PullLeftProps): JSX.Element => {
 
     // NEXT_PUBLIC_API_HOST が指定されていれば pathPrefix は `api` （外部に API サーバがある場合）
     // そうでなければ， BASE_PATH をみて pathPrefix を決める（内部に自前で API サーバを持つ場合）
+    const { basePath } = getRuntimeConfig<{ basePath: string }>()
+    const BASE_PATH = (basePath || '').replace(/^\//, '').replace(/\/$/, '')
+
     const pathPrefix = process.env.NEXT_PUBLIC_API_HOST ? 'api' : BASE_PATH ? `${BASE_PATH}/api` : 'api'
     url.pathname = `/${pathPrefix}/${encodeURIComponent(title)}.${fileType}`
     queryParams.delete('title')
