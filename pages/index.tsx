@@ -49,9 +49,7 @@ const getPageUrlFromSrc = async (source: string): Promise<string> => {
   if (avater && isValidUrl(avater)) params.set('avater', await getShortenUrl(avater))
 
   url.search = params.toString()
-  console.log(url.href)
   const res = await getShortenUrl(url.href)
-  console.log(res)
 
   return res
 }

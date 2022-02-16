@@ -72,8 +72,6 @@ const PullLeft = ({ setState }: PullLeftProps): JSX.Element => {
       // Unhandled Runtime Error
       // TypeError: tags.split is not a function
       // https://custom-og-image-generator.vercel.app/?logo=https%3A%2F%2Fgithub.githubassets.com%2Fimages%2Fmona-loading-default-static.svg&aka=%40Ningensei848&avater=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F763543133724352513%2Fr6RlBYDo_400x400.jpg&author=Kiai&title=This%20%60App%60%20supports%20not%20only%20**Markdown**%2C%20_but%20also_%3Cbr%20%2F%3E**Emoji**%20%F0%9F%8E%89%F0%9F%8E%8A%F0%9F%8D%BE%F0%9F%A5%B3%20_and_%3Cbr%20%2F%3E%20%24%5CKaTeX%24&tags=nextjs&tags=image-generator&tags=vercel&tags=ogp-image&site=Ningensei848%2Fog-image&theme=light&copyright=Kubokawa%20Takara
-      console.log(typeof tags)
-      console.log(tags)
       tags.split(/[,，\s]+/).map((tag) => queryParams.append('tags', tag))
     }
 
