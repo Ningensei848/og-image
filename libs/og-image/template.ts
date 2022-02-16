@@ -1,18 +1,23 @@
 import { getRuntimeConfig } from 'consts/global'
+import { calcChar } from 'libs/utils'
 import { getStaticMarkup } from 'components/OGImage/Template'
 
 import type { ParsedRequest } from 'types/og-image'
 
 const getCss = (props: ParsedRequest): string => {
   const { theme, logo, title } = props
-  const { plemolJP: PlemolJP } = getRuntimeConfig<{ plemolJP: string }>()
+
   const background = theme === 'dark' ? '#1b1b1b' : '#fefefa'
   const foreground = theme === 'dark' ? '#fefefa' : '#353839'
   const codeBackground = theme === 'dark' ? '#333437' : '#f5f6f7'
   const codeTextColor = theme === 'dark' ? '#19ffcc' : '#e60033'
   const radial = theme === 'dark' ? 'dimgray' : 'lightgray'
   const subText = theme === 'dark' ? 'lightgray' : 'dimgray'
-  const marginScale = title.length > 32 ? 4.8 : 18 - 13.2 * (title.length / 32) // 9 - 4.8
+
+  const correctedLength = calcChar(title)
+  const marginScale = correctedLength > 32 ? 4.8 : 18 - 13.2 * (correctedLength / 32) // 9 - 4.8
+
+  const { plemolJP: PlemolJP } = getRuntimeConfig<{ plemolJP: string }>()
 
   return `
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500&display=swap');
