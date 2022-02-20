@@ -7,7 +7,7 @@ const buildId = process.env.BUILD_ID || 'build-id'
 const assetPrefix = process.env.BASE_PATH ? `/${process.env.BASE_PATH}` : ''
 const plemolJP = readFileSync(
     // process.cwd() is expected `/path/to/${ProjectRoot}
-    `${process.cwd()}/libs/og-image/_fonts/PlemolJPConsoleHS-Text.woff2`
+    `${process.cwd()}/libs/og-image/_fonts/PlemolJPConsoleHS-Semibold.woff2`
 ).toString('base64')
 // ----------------------------------------------------------------------------
 

@@ -40,7 +40,7 @@ const getCss = (props: ParsedRequest): string => {
     background-color: ${codeBackground};
     border: 0.1rem solid rgba(0, 0, 0, 0.1);
     border-radius: 0.4rem;
-    font-family: 'PlemolJP Console';
+    font-family: 'PlemolJP Console', 'Noto Sans JP', monospace;
     font-size: 0.85em;
     padding: 0.2em 0.4em;
     vertical-align: 0.08em;
