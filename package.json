@@ -1,65 +1,28 @@
 {
-  "name": "custom-og-image",
+  "name": "og-image",
+  "version": "0.1.0",
   "private": true,
-  "version": "0.0.0",
-  "engines": {
-    "node": ">=14"
-  },
   "scripts": {
-    "dev": "next",
+    "dev": "next dev",
     "build": "next build",
-    "export": "next export",
     "start": "next start",
-    "type-check": "tsc",
-    "lint": "next lint --cache --ignore-path .gitignore",
-    "lint:fix": "yarn lint --fix && yarn format",
-    "format": "prettier --ignore-path .gitignore --write './{pages,components,libs,styles,types}/**/*.{js,jsx,ts,tsx,json,css,md,mdx}'"
+    "lint": "next lint"
   },
   "dependencies": {
-    "budoux": "^0.0.3",
-    "chrome-aws-lambda": "6.0.0",
-    "cors": "^2.8.5",
-    "marked": "^4.0.12",
-    "next": "^12.0.10",
-    "next-share": "^0.13.0",
-    "puppeteer-core": "6.0.0",
-    "query-string": "^7.1.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "swr": "^1.2.1",
-    "twemoji": "^13.1.0"
+    "@vercel/og": "^0.6.2",
+    "next": "14.2.3",
+    "react": "^18",
+    "react-dom": "^18"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.12",
-    "@types/katex": "^0.11.1",
-    "@types/marked": "^4.0.2",
-    "@types/node": "^12.12.21",
-    "@types/puppeteer-core": "^5.4.0",
-    "@types/react": "^17.0.2",
-    "@types/react-dom": "^17.0.1",
-    "@types/twemoji": "^12.1.2",
-    "@typescript-eslint/eslint-plugin": "^5.11.0",
-    "@typescript-eslint/parser": "^5.11.0",
-    "eslint": "8.9.0",
-    "eslint-config-next": "^12.0.10",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-import-resolver-typescript": "^2.5.0",
-    "eslint-plugin-eslint-comments": "^3.2.0",
-    "eslint-plugin-import": "^2.25.4",
-    "prettier": "^2.5.1",
-    "typescript": "^4.5.5"
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.3",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
   },
-  "prettier": {
-    "embeddedLanguageFormatting": "off",
-    "trailingComma": "none",
-    "tabWidth": 2,
-    "semi": false,
-    "singleQuote": true,
-    "jsxSingleQuote": true,
-    "printWidth": 120
-  },
-  "eslintIgnore": [
-    ".eslintrc.js",
-    "next.config.mjs"
-  ]
+  "packageManager": "pnpm@9.1.2+sha512.127dc83b9ea10c32be65d22a8efb4a65fb952e8fefbdfded39bdc3c97efc32d31b48b00420df2c1187ace28c921c902f0cb5a134a4d032b8b5295cbfa2c681e2"
 }
