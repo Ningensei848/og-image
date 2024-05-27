@@ -1,6 +1,23 @@
-import { ImageResponse } from 'next/og';
+import { ImageResponse } from 'next/og'
+import { parseRequest } from '@/lib/parser'
 
-export async function GET() {
+import { type NextRequest } from 'next/server'
+
+type Params = {
+    slug: string[]
+}
+
+export async function GET(request: NextRequest, context: { params: Params }) {
+    const { slug } = context.params
+    const searchParams = request.nextUrl.searchParams
+    // cf. https://nextjs.org/docs/app/building-your-application/routing/route-handlers#url-query-parameters
+
+    console.log(slug)
+    console.log(searchParams)
+
+    const parsedReq = parseRequest(slug, searchParams)
+    console.log(parsedReq)
+
     return new ImageResponse(
         (
             <div
@@ -23,5 +40,5 @@ export async function GET() {
             width: 1200,
             height: 630,
         },
-    );
+    )
 }
